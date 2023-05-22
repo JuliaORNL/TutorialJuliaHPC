@@ -1,0 +1,11 @@
+title: Julia for HPC Tutorial
+email: godoywf@ornl.gov
+
+theme: just-the-docs
+callouts:
+  warning:
+    title: Warning
+    color: red
+  info:
+    title: Julia Info
+    color: blue
