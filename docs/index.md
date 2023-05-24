@@ -30,8 +30,12 @@ It's a good time to get Julia v1.9 installed from their [website](https://julial
 
 # Why Julia?
 
+{: .highlight }
+"Can a machine translate a sufficiently rich mathematical language into a suffienciently economical program at a sufficiently low cost to make the whole affair feasible?" 
+-- John Back on Fortran (1980)
+
 1. Compiled via LLVM for performance. **Julia is Compiled**
-2. Provides a unified **tested** ecosystem (packaging, testing, notebooks, interactivity, etc.). See JuliaCon [presentation](https://www.youtube.com/watch?v=9YWwiFbaRx8) on GeneralRegistry.
+2. Provides a unified **tested** ecosystem (packaging, testing, tools, interactivity, etc.). See JuliaCon [presentation](https://www.youtube.com/watch?v=9YWwiFbaRx8) on GeneralRegistry.
 3. Community of HPC people from day-1 (the community is you, low entry barrier)
 4. Sustained by [JuliaHub](https://juliahub.com/), MIT's JuliaLab, NumFocus and several open-source [contributors](https://julialang.org/blog/2019/02/julia-entities/)
 5. Great math (Fortran) and data science (Python) simple syntax
