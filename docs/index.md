@@ -34,24 +34,26 @@ It's a good time to get Julia v1.9 installed from their [website](https://julial
 2. Provides a unified **tested** ecosystem (packaging, testing, notebooks, interactivity, etc.). See JuliaCon [presentation](https://www.youtube.com/watch?v=9YWwiFbaRx8) on GeneralRegistry.
 3. Community of HPC people from day-1 (the community is you, low entry barrier)
 4. Sustained by [JuliaHub](https://juliahub.com/), MIT's JuliaLab, NumFocus and several open-source [contributors](https://julialang.org/blog/2019/02/julia-entities/)
-5. Great math (Fortran) and data science (Python) syntax
-6. Rapid prototyping/productivity: stay in one language+ecosystem
+5. Great math (Fortran) and data science (Python) simple syntax
+6. Rapid prototyping: stay in one language+ecosystem for your custom kernels + data analysis
 7. Interoperate with Fortran, C, C++ (via C), Python, R code in a lightweight manner
 8. Renewed interest for high-performance + high-productivity languages
-9. Great first language to expose HPC concepts
+9. Great first language to expose newcomers to both HPC + math concepts
+10. Contribute to HPC stack: CUDA.jl, MPI.jl, AMDGPU.jl, ADIOS2.jl, HDF5.jl...for us, by us
+
+![](images/Blog_2303_julia_value_proposition.png)**Julia's value proposition**
 
 # Why not Julia?
 
-1. Already existing infrastructure/expertise
+1. Already existing infrastructure/expertise (Fortran is perfect!)
 2. Too much of an investment to learn a new language
 3. Performance/productivity solutions already in place
 4. Having N-language/ecosystems is not a problem
 5. Python + X is well supported for your needs
-6. Garbage collection, Just-in-time (JIT) is an issue
+6. Garbage collection, Just-in-time (JIT) compilation are issues
 7. Developing low-level system libraries
-
-![](images/Blog_2303_julia_value_proposition.png)**Julia's value proposition**
-
+8. Domain outside "technical computing"
+9. Overall, you do not see any value added
 
 ## Resources
 
