@@ -53,8 +53,12 @@ The goal of the tutorial is to introduce an audience familiar with high-performa
    
 4. [JuliaCon](https://juliacon.org/2023/)
 
+5. [Exascale Computing Project Julia for HPC Tutorial](https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fuoregon.zoom.us%2Frec%2Fshare%2Fd09vvh4vO6tKJbpOJLragcL6ts8Fwc4_GomfVpfhPCf4RJRDZYWBIm0MVaEm6flA.SCh-WAHCuqv5zdVq&data=05%7C01%7Cgodoywf%40ornl.gov%7Ce803251ed6414930b0d008db1452f5fc%7Cdb3dbd434c4b45449f8a0553f9f5f25e%7C1%7C0%7C638126118806670838%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=0LyN5HxRKwaet3GXFfQn50S7O3JS1o6%2BNhwoOQuMgA8%3D&reserved=0)
+
 # Acknowledgements
 
 This research was supported by the Exascale Computing Project (17-SC-20-SC), a collaborative effort of the U.S. Department of Energy Office of Science and the National Nuclear Security Administration. 
 
 [ECP PROTEAS-TUNE](https://www.ornl.gov/project/proteas-tune), [ASCR Bluestone](https://csmd.ornl.gov/Bluestone), [IDEAS](https://ideas-productivity.org/ideas-ecp/) projects, and the [Sustainable Research Pathways Program](https://shinstitute.org/sustainable-research-pathways-srp/) 
+
+The many people in the Julia community that made this possible.
