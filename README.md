@@ -1,2 +1,4 @@
 # TutorialJuliaHPC
-Tutorial codes and GitHub Pages documentation materials for Julia in high-performance computing
+
+Tutorial documentation materials for Julia in high-performance computing. 
+GitHub Pages website [link](https://juliaornl.github.io/TutorialJuliaHPC/).
