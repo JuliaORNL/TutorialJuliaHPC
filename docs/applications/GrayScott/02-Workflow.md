@@ -5,7 +5,16 @@ nav_order: 2.2
 parent: GrayScott reaction-diffusion 3D solver
 ---
 
-The Julia code can be found as part of the ADIOS2-Examples [repo](https://github.com/ornladios/ADIOS2-Examples).
+# GrayScott.jl code
+
+The GrayScott.jl code used for this tutorial is hosted on GitHub [JuliaORNL/GrayScott.jl](https://github.com/JuliaORNL/GrayScott.jl).
+The package follows a typical Julia project structure:
+
+- `Project.toml` : project dependencies and description
+- `gray-scott.jl` : Julia program passed to the `julia` executable
+- `src`: source code for `module GrayScott`, `simluation` and `helper` functions
+- `test`: unit and functional (WIP) tests with `julia --project test/runtests.jl`  
+- `LICENSE`: MIT permissive
 
 # Workflow
 
