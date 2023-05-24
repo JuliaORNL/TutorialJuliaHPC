@@ -80,6 +80,8 @@ It's a good time to get Julia v1.9 installed from their [website](https://julial
 9. [From zero to Julia!](https://techytok.com/from-zero-to-julia/). Series of introductory lessons.
 
 10. [Julia for Sustainable HPC Software](https://docs.google.com/presentation/d/1-GEFfkmwZJM44a0BOSpijMpJ8OZ54Or36Ax8LpNbBEg/edit#slide=id.g1e2ac798e0a_0_653) by Valentin Churavy.
+
+11. Godoy, William F., Pedro Valero-Lara, T. Elise Dettling, Christian Trefftz, Ian Jorquera, Thomas Sheehy, Ross G. Miller, Marc Gonzalez-Tallada, Jeffrey S. Vetter, and Valentin Churavy. "Evaluating performance and portability of high-level programming models: Julia, Python/Numba, and Kokkos on exascale nodes." IPDPS HIPS workshop (2023), [arXiv:2303.06195](https://doi.org/10.48550/arXiv.2303.06195)
  
 # Acknowledgements
 
