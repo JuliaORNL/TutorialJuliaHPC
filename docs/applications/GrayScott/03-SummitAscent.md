@@ -24,27 +24,20 @@ We assume the user has access to `trn017` training account
     cd $PROJWORK/trn017
     mkdir $USER
     cd $USER
-    git clone https://github.com/ornladios/ADIOS2-Examples.git
+    git clone https://github.com/JuliaORNL/GrayScott.jl.git
     ```
    
 3. Install package dependencies in Julia REPL
 
-  - Scripts prepared for this tutorial `cd ADIOS2-Examples/source/julia/GrayScott.jl/scripts`
+  - Scripts prepared for this tutorial `cd GrayScott.jl/scripts`
 
-  - Modify the first lines to setup a `JULIA_DEPOT_PATH`, otherwise `~/.julia` is selected by default which is not recommended due to small available space
+  - The first line setup a `JULIA_DEPOT_PATH`, otherwise `~/.julia` is selected by default which is not recommended due to small available space. The second assumes GrayScott.jl was cloned under `$USER`.
 
     ```
     export JULIA_DEPOT_PATH=$PROJWORK/trn017/$USER/julia_depot
-    GS_DIR=$PROJWORK/trn017/$USER/ADIOS2-Examples/source/julia/GrayScott.jl
+    GS_DIR=$PROJWORK/trn017/$USER/GrayScott.jl
     ``` 
   
   {: .info }
   JULIA_DEPOT is where Julia packages and artifacts (e.g. extra data) will be installed for different local environments. Project/system admins should prefer a global installation of commonly used packages: MPI.jl, CUDA.jl, Plots.jl, etc. due to their size to avoid multiple copies.
 
-  
-
-
-
-
-
-   

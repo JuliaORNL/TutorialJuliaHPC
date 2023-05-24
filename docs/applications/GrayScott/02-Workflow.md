@@ -125,3 +125,4 @@ graph TD;
   1. Add support including random number on device kernel code on `AMDGPU.jl`
   2. Set the domain size `L` in the configuration file as a multiple of 6 for Summit, and a multiple of 4 on Crusher
   3. Add data analysis: PDF for u and v and Julia 2D plotting capabilities: Plots.jl, Makie.jl
+ 
