@@ -32,7 +32,7 @@ It's a good time to get Julia v1.9 installed from their [website](https://julial
 
 {: .highlight }
 "Can a machine translate a sufficiently rich mathematical language into a suffienciently economical program at a sufficiently low cost to make the whole affair feasible?" 
--- John Back on Fortran (1980)
+-- John Backus on Fortran (1980)
 
 1. Compiled via LLVM for performance. **Julia is Compiled**
 2. Provides a unified **tested** ecosystem (packaging, testing, tools, interactivity, etc.). See JuliaCon [presentation](https://www.youtube.com/watch?v=9YWwiFbaRx8) on GeneralRegistry.
