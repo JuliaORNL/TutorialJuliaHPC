@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Julia Notebooks
-nav_order: 2.4
+nav_order: 2.5
 parent: GrayScott reaction-diffusion 3D solver
 ---
 
@@ -10,12 +10,13 @@ parent: GrayScott reaction-diffusion 3D solver
 
 This is a step-by-step guide
 
-1. `ssh <username>@opendtn.ccs.ornl.gov`
+1. ssh into odo: `ssh <username>@login1.odo.olcf.ornl.gov`
 
 2. Launch Julia:
 
     ```
-    $ /ccsopen/proj/trn017/opt/julia-1.9.0/bin/julia 
+    $ module load julia
+    $ julia
                 _
     _       _ _(_)_     |  Documentation: https://docs.julialang.org
     (_)     | (_) (_)    |
@@ -31,30 +32,33 @@ This is a step-by-step guide
     ```
     julia> using IJulia
 
-    julia> installkernel("Julia (16 threads)", env=Dict("LD_LIBRARY_PATH" => "", "JULIA_NUM_THREADS" => "16"))
+    julia> installkernel("Julia-24threads", "--project=@.", env=Dict("LD_LIBRARY_PATH" => "", "JULIA_NUM_THREADS" => "24"))
     ```
 
 4. The above would create a config file to launch the Julia kernel next time we open [Jupyter OLCF open](https://jupyter-open.olcf.ornl.gov/)
 
     ```
-    $ cat  /ccsopen/home/wfg/.local/share/jupyter/kernels/julia-_16-threads_-1.9/kernel.json 
+    $ cat /ccsopen/home/wgodoy/.local/share/jupyter/kernels/julia-24threads_-1.10/kernel.json 
     {
-    "display_name": "Julia (16 threads) 1.9.0",
-    "argv": [
-        "/autofs/nccsopen-svm1_proj/trn017/opt/julia-1.9.0/bin/julia",
-        "-i",
-        "--color=yes",
-        "/ccsopen/home/wfg/.julia/packages/IJulia/6TIq1/src/kernel.jl",
-        "{connection_file}"
-    ],
-    "language": "julia",
-    "env": {
-        "LD_LIBRARY_PATH": "",
-        "JULIA_NUM_THREADS": "16"
-    },
-    "interrupt_mode": "signal"
+      "display_name": "Julia-24threads) 1.10.4",
+      "argv": [
+      "/autofs/nccsopen-svm1_sw/odo/julia-1.10.4/bin/julia",
+      "-i",
+      "--color=yes",
+      "/ccsopen/home/wgodoy/.julia/packages/IJulia/Vo51o/src/kernel.jl",
+      "{connection_file}"
+      ],
+      "language": "julia",
+      "env": {
+         "LD_LIBRARY_PATH": "",
+         "JULIA_NUM_THREADS": "24"
+      },
+      "interrupt_mode": "signal"
     }
     ```
+
+5. Log into [Jupyter OLCF open](https://jupyter-open.olcf.ornl.gov/) and select the kernel `Julia-24threads) 1.10.4` to start a new notebook. Example provided in [GrayScott.jl/Notebooks/Plot2D.jl/src/Julia-reading.ipynb](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/Notebooks/Plot2D.jl/src/Julia-reading.ipynb). Package dependencies need to be precompiled on the first run, instantiate: `GrayScott-JACC/Notebooks/Plot2D.jl/Project.toml`.
+
 
 
 # Julia's own Pluto.jl
