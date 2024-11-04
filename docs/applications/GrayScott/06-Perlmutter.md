@@ -25,8 +25,7 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     cd $SCRATCH
     mkdir $USER
     cd $USER
-    git clone https://github.com/JuliaORNL/GrayScott.jl.git
-    git checkout -b GrayScott-JACC origin/GrayScott-JACC
+    git clone --branch GrayScott-JACC https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
 3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_perlmutter.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_perlmutter.sh) to set up modules, environment, and packages.
