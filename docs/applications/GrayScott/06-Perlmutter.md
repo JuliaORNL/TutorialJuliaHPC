@@ -29,10 +29,7 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     git checkout -b GrayScott-JACC origin/GrayScott-JACC
     ```
 
-2. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_perlmutter.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_perlmutter.sh) to set up modules, environment, and packages.
-
-{: .info }
-  JULIA_DEPOT_PATH is where Julia packages and artifacts (e.g. extra data) will be installed for different local environments. This is a good practice to avoid conflicts between different environments.
+3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_perlmutter.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_perlmutter.sh) to set up modules, environment, and packages.
 
     ```bash
     source GrayScott.jl/scripts/config_perlmutter.sh
@@ -93,6 +90,9 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     # To change back end to CPU modify LocalPreferences.toml or use these commands
     julia --project=$GS_DIR -e 'using GrayScott.GrayScottPreferences; GrayScottPreferences.set_backend("jacc-cuda")'
     ```
+    
+    {: .info }
+    JULIA_DEPOT_PATH is where Julia packages and artifacts (e.g. extra data) will be installed for different local environments. This is a good practice to avoid conflicts between different environments.
 
 ## Running Gray-Scott jobs on Perlmutter
 
@@ -111,7 +111,7 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
 
 3. Submit your first job to Perlmutter. It should generate an adios bp file output, and total runtime should be around 12 seconds using a single MPI process and NVIDIA GPU.
    
-   ```bash
+    ```bash
     cd run001
     sbatch job_perlmutter.sh
     ```
