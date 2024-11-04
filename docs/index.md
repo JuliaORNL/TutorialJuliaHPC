@@ -11,22 +11,21 @@ nav_order: 1
 The goal of the tutorial is to introduce an audience familiar with high-performance computing (HPC) concepts to the Julia programming language using a hands-on approach.
 
 {: .info}
-It's a good time to get Julia v1.9 installed from their [website](https://julialang.org/downloads/)
+It's a good time to get the latest Julia installed from their [website](https://julialang.org/downloads/)
 
 ## Covered:
-- Workflow aspects: simulation CPU/CPU, parallel I/O, data analysis (Notebooks)
-- Multiple dispatch for array back ends (CPU, CUDA, AMDGPU)
+- Workflow aspects: simulation CPU/CPU, parallel I/O, data analysis (e.g. Notebooks)
+- Multiple dispatch for array back ends (CPU, GPU: CUDA, AMDGPU)
 - Multithreaded CPU using Julia @threads
-- GPU programming using CUDA.jl and AMDGPU.jl
-- Parallel I/O with ADIOS2.jl (outputs can be visualized in ParaView)
-- Julia on OLCF's JupyterHub and Pluto.jl Notebooks (read and plot)
+- GPU programming using vendor (CUDA.jl, AMDGPU.jl) and performance portable layer (JACC.jl, KernelAbstractions.jl)
+- Parallel I/O with ADIOS2.jl (outputs can be visualized in ParaView locally)
+- Julia on OLCF's JupyterHub and Pluto.jl Notebooks (read and plot using Makie.jl)
 
 ## Not Covered (future topics?):
 - More general aspects of the language (software engineering, AI)
 - AI infrastructure: Flux.jl, SciML
-- Performance portability layers: e.g. KernelAbstractions.jl
 - Ahead-of-time compilation: PackageCompiler.jl
-- Tools ecosystem for profiling, debugging (well some)
+- Tools ecosystem for profiling, debugging (well some vendor supported)
 
 # Why Julia?
 
@@ -43,7 +42,7 @@ It's a good time to get Julia v1.9 installed from their [website](https://julial
 7. Interoperate with Fortran, C, C++ (via C), Python, R code in a lightweight manner
 8. Renewed interest for high-performance + high-productivity languages
 9. Great first language to expose newcomers to both HPC + math concepts
-10. Contribute to HPC stack: CUDA.jl, MPI.jl, AMDGPU.jl, ADIOS2.jl, HDF5.jl...for us, by us
+10. Contribute to HPC stack: MPI.jl, CUDA.jl, AMDGPU.jl, KernelAbstractions.jl, JACC.jl, ADIOS2.jl, HDF5.jl...for us, by us
 
 ![](images/Blog_2303_julia_value_proposition.png)**Julia's value proposition**
 
@@ -65,28 +64,26 @@ It's a good time to get Julia v1.9 installed from their [website](https://julial
 
 2. [Bridging HPC Communities through the Julia Programming Language](https://arxiv.org/abs/2211.02740)
    
-3. [JuliaParallel.org](https://juliaparallel.org/resources/). Checkout the monthly HPC call and previous events: SC22 BoF, ECP BoF, Tutorial days.
+3. [JuliaParallel.org](https://juliaparallel.org/resources/). Checkout the monthly HPC call and previous events: SC24 BoF.
    
-4. [JuliaCon](https://juliacon.org/2023/)
+4. [JuliaCon](https://juliacon.org/2024/)
 
-5. [Exascale Computing Project Julia for HPC Tutorial](https://gcc02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fuoregon.zoom.us%2Frec%2Fshare%2Fd09vvh4vO6tKJbpOJLragcL6ts8Fwc4_GomfVpfhPCf4RJRDZYWBIm0MVaEm6flA.SCh-WAHCuqv5zdVq&data=05%7C01%7Cgodoywf%40ornl.gov%7Ce803251ed6414930b0d008db1452f5fc%7Cdb3dbd434c4b45449f8a0553f9f5f25e%7C1%7C0%7C638126118806670838%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=0LyN5HxRKwaet3GXFfQn50S7O3JS1o6%2BNhwoOQuMgA8%3D&reserved=0).
+5. [OLCF September User's Call presentations](https://www.olcf.ornl.gov/calendar/userconcall-sep2022/) 
 
-6. [OLCF September User's Call presentations](https://www.olcf.ornl.gov/calendar/userconcall-sep2022/) 
+6. [Julia for ORNL Science Workshop](https://ornl.github.io/events/jufos2024/)
 
-7. [Julia for ORNL Science Workshop](https://ornl.github.io/events/jufos2022/)
+7. [Julia Basics Notebooks](https://github.com/ornl-training/julia-basics). Run on myBinder or locally.
 
-8. [Julia Basics Notebooks](https://github.com/ornl-training/julia-basics). Run on myBinder or locally.
+8. [From zero to Julia!](https://techytok.com/from-zero-to-julia/). Series of introductory lessons.
 
-9. [From zero to Julia!](https://techytok.com/from-zero-to-julia/). Series of introductory lessons.
+9. [Julia for Sustainable HPC Software](https://docs.google.com/presentation/d/1-GEFfkmwZJM44a0BOSpijMpJ8OZ54Or36Ax8LpNbBEg/edit#slide=id.g1e2ac798e0a_0_653) by Valentin Churavy.
 
-10. [Julia for Sustainable HPC Software](https://docs.google.com/presentation/d/1-GEFfkmwZJM44a0BOSpijMpJ8OZ54Or36Ax8LpNbBEg/edit#slide=id.g1e2ac798e0a_0_653) by Valentin Churavy.
+10. William F. Godoy, Pedro Valero-Lara, T. Elise Dettling, Christian Trefftz, Ian Jorquera, Thomas Sheehy, Ross G. Miller, Marc Gonzalez-Tallada, Jeffrey S. Vetter, and Valentin Churavy. "Evaluating performance and portability of high-level programming models: Julia, Python/Numba, and Kokkos on exascale nodes." In 2023 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW), pp. 373-382. IEEE, 2023. [doi:10.1109/IPDPSW59300.2023.00068](https://doi.org/10.1109/IPDPSW59300.2023.00068)
 
-11. Godoy, William F., Pedro Valero-Lara, T. Elise Dettling, Christian Trefftz, Ian Jorquera, Thomas Sheehy, Ross G. Miller, Marc Gonzalez-Tallada, Jeffrey S. Vetter, and Valentin Churavy. "Evaluating performance and portability of high-level programming models: Julia, Python/Numba, and Kokkos on exascale nodes." IPDPS HIPS workshop (2023), [arXiv:2303.06195](https://doi.org/10.48550/arXiv.2303.06195)
- 
+11. William F. Godoy, Pedro Valero-Lara, Caira Anderson, Katrina W. Lee, Ana Gainaru, Rafael Ferreira Da Silva, and Jeffrey S. Vetter. 2023. Julia as a unifying end-to-end workflow language on the Frontier exascale system. In Proceedings of the SC '23 Workshops of The International Conference on High Performance Computing, Network, Storage, and Analysis (SC-W '23). Association for Computing Machinery, New York, NY, USA, 1989–1999. [doi:10.1145/3624062.3624278](https://doi.org/10.1145/3624062.3624278)
+
+
 # Acknowledgements
 
-This research was supported by the Exascale Computing Project (17-SC-20-SC), a collaborative effort of the U.S. Department of Energy Office of Science and the National Nuclear Security Administration. 
-
-[ECP PROTEAS-TUNE](https://www.ornl.gov/project/proteas-tune), [ASCR Bluestone](https://csmd.ornl.gov/Bluestone), [IDEAS](https://ideas-productivity.org/ideas-ecp/) projects, and the [Sustainable Research Pathways Program](https://shinstitute.org/sustainable-research-pathways-srp/) 
-
+This tutorial is supported by the following ASCR projects: project Fairbanks as part of MAGNET, and S4PST and PESO of the Next Generation of Scientific Software Technologies.
 The many people in the Julia community that made this possible. Thanks to Suzanne Parete-Koon from the Oak Ridge Leadership Center (OLCF).
