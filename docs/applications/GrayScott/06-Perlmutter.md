@@ -212,3 +212,80 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
 
     srun -n 1 --gpus=1 julia --project=$GS_DIR $GS_EXE settings-files.json
     ```
+  
+## Visualizing the output on jupyter.nersc.gov
+
+1.  Access Perlmutter. We will stay in the $HOME directory for this step.
+  
+    ```
+    $ ssh <user>@perlmutter.nersc.gov
+    ```
+
+2. Create a Julia kernel and environment for jupyter.nersc.gov. This is a one-time setup that will install packages in your home directory under `.julia` and kernels in `.local/share/jupyter/kernels` (might take a while)
+
+    ```bash
+    git clone --branch GrayScott-JACC https://github.com/JuliaORNL/GrayScott.jl.git
+    cd GrayScott.jl/Notebooks/Plot2D.jl
+    source config_Perlmutter_IJulia_kernel.sh  
+    ```
+
+    Outputs:
+
+    ```bash
+    cat config_Perlmutter_IJulia_kernel.sh
+    ```
+
+    ```bash
+    # source this file to generate a new IJulia kernel for Perlmutter
+    module load julia/1.10.4
+    module load cray-hdf5-parallel
+    ml use /global/common/software/nersc/julia_hpc_24/modules
+    module load adios2
+    export JULIA_ADIOS2_PATH=/global/common/software/nersc/julia_hpc_24/adios2/gnu
+
+    # instantiate project packages
+    julia --project -e 'using Pkg; Pkg.instantiate()'
+
+    # capture current environment
+    julia --project -e 'using IJulia; installkernel("Julia-16-threads", "--project=@.", env=Dict("LD_LIBRARY_PATH" => string(ENV["LD_LIBRARY_PATH"]), "JULIA_NUM_THREADS" => "16", "JULIA_ADIOS2_PATH" => string(ENV["JULIA_ADIOS2_PATH"]) ))'
+    ```
+
+    ```bash
+    cat ~/.local/share/jupyter/kernels/julia-16-threads-1.10/kernel.json
+    ```
+
+    ```json
+    {
+      "display_name": "Julia-16-threads 1.10.4",
+      "argv": [
+        "/global/common/software/nersc/n9/julia/1.10.4/bin/julia",
+        "-i",
+        "--color=yes",
+        "--project=@.",
+        "/global/homes/t/train671/.julia/packages/IJulia/dR0lE/src/kernel.jl",
+        "{connection_file}"
+      ],
+      "language": "julia",
+      "env": {
+        "LD_LIBRARY_PATH": "/global/common/software/nersc/julia_hpc_24/adios2/gnu/lib64:/global/common/software/nersc9/darshan/default/lib:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/math_libs/12.2/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/extras/CUPTI/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/extras/Debugger/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/nvvm/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/lib64:/opt/cray/pe/papi/7.0.1.2/lib64:/opt/cray/libfabric/1.20.1/lib64",
+        "JULIA_ADIOS2_PATH": "/global/common/software/nersc/julia_hpc_24/adios2/gnu",
+        "JULIA_NUM_THREADS": "16"
+      },
+      "interrupt_mode": "signal"
+    }
+    ```
+
+3. Start a jupyter notebook on Perlmutter login into [https://jupyter.nersc.gov/](https://jupyter.nersc.gov/) with the same user and password used to access Perlmutter.
+
+4. Start a "Login Node" runner (might take a while).
+   
+5. Browse into the `GrayScott.jl/Notebooks/Plot2D.jl/src/Plot2D.ipynb` notebook and open it.
+   
+6. Select the Julia-16-threads kernel from the dropdown menu.
+   
+7. Run the Notebook cells (right triangle or Run menu > Run All Cells) and check you can get to the picture shown below. This is your first complete workflow from running a Gray-Scott simulation on Perlmutter high-performance computing system and visualizing the results on jupyter.nersc.gov!!!!
+
+    ![Gray-Scott analysis](./images/jupyter.png)
+    *Gray-Scott U and V output visualization using Makie.jl and ADIOS2.jl*
+
+8. Congratulations!
