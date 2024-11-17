@@ -28,7 +28,7 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     git clone --branch GrayScott-JACC https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
-3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_perlmutter.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_perlmutter.sh) to set up modules, environment, and packages.
+3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_perlmutter.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_perlmutter.sh) to set up modules, environment, and packages. This is a one-time step and might take a few minutes.
 
     ```bash
     source GrayScott.jl/scripts/config_perlmutter.sh
@@ -108,7 +108,7 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     cp GrayScott.jl/scripts/job_perlmutter.sh run001
     ```
 
-3. Submit your first job to Perlmutter. It should generate an adios bp file output, and total runtime should be around 12 seconds using a single MPI process and NVIDIA GPU.
+3. Submit your first job to Perlmutter - it might take a while as in any HPC system. It should generate an adios bp file output, and total runtime should be around 12 seconds using a single MPI process and NVIDIA GPU.
    
     ```bash
     cd run001
