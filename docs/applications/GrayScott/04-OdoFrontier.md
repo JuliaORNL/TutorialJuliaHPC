@@ -7,95 +7,194 @@ parent: GrayScott reaction-diffusion 3D solver
 
 # Running Gray-Scott on Odo/Frontier
 
-This instructions are for the [Odo training system at OLCF](https://docs.olcf.ornl.gov/systems/odo_user_guide.html). Which is identical to [Frontier](https://docs.olcf.ornl.gov/systems/frontier_user_guide.html).
+This instructions are for the [Odo training system at OLCF](https://docs.olcf.ornl.gov/systems/odo_user_guide.html). Which is almost identical to [Frontier](https://docs.olcf.ornl.gov/systems/frontier_user_guide.html).
 
-We assume the user has access to `trn023` training account
+We assume the user has access to the `trn036` training account
 
-0. Access Odo/Frontier
+1. Access Odo/Frontier
 
     ```
     $ ssh USERNAME@login1.odo.olcf.ornl.gov
     ```
 
-1. Obtain Gray-Scott, first access your scrath directory, clone the repository poiting at the GrayScott-JACC branch. Replace wgodoy with your username.
+2. Obtain Gray-Scott, first access your scrath directory, clone the repository poiting at the GrayScott-JACC branch. Replace wgodoy with your username.
 
     ```
-    cd /gpfs/wolf2/olcf/trn023/scratch/wgodoy
-    mkdir tutorial
-    cd tutorial
-    git clone https://github.com/JuliaORNL/GrayScott.jl.git
-    git checkout -b GrayScott-JACC origin/GrayScott-JACC
+    cd /gpfs/wolf2/olcf/trn036/scratch/wgodoy
+    git clone --branch GrayScott-JACC https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
-2. Install package dependencies in Julia REPL
-
-  - Script prepared for this tutorial [`GrayScott.jl/scripts/config_odo.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_odo.sh). Run it with `source config_odo.sh`.
+3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_odo.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_perlmutter.sh) to set up modules, environment, and packages. This is a one-time step and might take a few minutes.
 
     ```bash
-     #!/bin/bash
-
-     # Change the first 3 lines appropriately
-     PROJ_DIR=/gpfs/wolf2/olcf/trn023/scratch/wgodoy/tutorial
-     export JULIA_DEPOT_PATH=$PROJ_DIR/.julia
-     GS_DIR=$PROJ_DIR/GrayScott.jl
-
-     # remove existing generated Manifest.toml
-     rm -f $GS_DIR/Manifest.toml
-     rm -f $GS_DIR/LocalPreferences.toml
-
-     # good practice to avoid conflicts with existing default modules
-     module purge
-
-     # load required modules
-     module load PrgEnv-gnu-amd/8.4.0
-     module load cray-mpich
-     module load adios2/2.9.2
-     module load julia/1.10.4
-     # point at current Julia installation until module is available on Odo
-     # export PATH=/gpfs/wolf2/olcf/trn023/world-shared/opt/julia-1.10.3/bin:$PATH
-
-     # Required to point at underlying modules above
-     export JULIA_ADIOS2_PATH=$OLCF_ADIOS2_ROOT
-
-     # MPIPreferences to use Cray's MPICH
-     julia --project=$GS_DIR -e 'using Pkg; Pkg.add("MPIPreferences")'
-     julia --project=$GS_DIR -e 'using MPIPreferences; MPIPreferences.use_system_binary(mpiexec="srun", vendor="cray")'
-
-     # Set up underlying rocm
-     # this will polute Project.toml with AMDGPU.jl
-     julia --project=$GS_DIR -e 'using Pkg; Pkg.add("AMDGPU")'
-
-     export ROCM_PATH=/opt/rocm-5.3.0
-     # adds an entry to LocalPreferences.toml
-     julia --project=$GS_DIR -e 'using AMDGPU; AMDGPU.ROCmDiscovery.use_artifacts!(false)'
-
-     # Instantiate the project by installing packages in Project.toml
-     julia --project=$GS_DIR -e 'using Pkg; Pkg.instantiate()'
-     # Verify the packages are installed correctly
-     julia --project=$GS_DIR -e 'using Pkg; Pkg.build()'
-     # JACC.jl and GrayScott.jl won't precompile, but other packages will
-     julia --project=$GS_DIR -e 'using Pkg; Pkg.precompile()'
-
-     # Set jacc-amdgpu as the backend in LocalPreferences.toml
-     julia --project=$GS_DIR -e 'using GrayScott.GrayScottPreferences; GrayScottPreferences.set_backend("jacc-amdgpu")'
+    source GrayScott.jl/scripts/config_odo.sh
     ```
 
-    
-  {: .info }
-  JULIA_DEPOT is where Julia packages and artifacts (e.g. extra data) will be installed for different local environments. Project/system admins should prefer a global installation of commonly used packages: MPI.jl, CUDA.jl, Plots.jl, etc. due to their size to avoid multiple copies.
+    ```bash
+    #!/bin/bash
 
+    PROJ_DIR=/gpfs/wolf2/olcf/trn036/scratch/$USER
+    export JULIA_DEPOT_PATH=$PROJ_DIR/.julia
+    GS_DIR=$PROJ_DIR/GrayScott.jl
 
-3. Verify Julia v1.10.4 
-    
-    ```
+    # good practice to remove package and confi generated files 
+    rm -f $GS_DIR/Manifest.toml
+    rm -f $GS_DIR/LocalPreferences.toml
+
+    # good practice to avoid conflicts with existing default modules
+    module purge
+
+    # load required modules
+    module load PrgEnv-gnu-amd/8.6.0
+    module load cray-mpich
+    module load adios2/2.10.0-mpi
+
+    # Use Julia installed binary distribution until module is available
+    #module load julia/1.10.4
+    export PATH=/gpfs/wolf2/olcf/trn036/world-shared/julia-1.11.3/bin:$PATH
     julia --version
+
+    # Set ROCM system libraries for AMDGPU.jl (default = /opt/rocm)
+    export ROCM_PATH=/opt/rocm-5.7.1
+
+    # Set ADIOS2 system libraries for ADIOS2.jl
+    export JULIA_ADIOS2_PATH=$OLCF_ADIOS2_ROOT
+
+    # DOWNLOAD JULIA PACKAGES
+    julia --project=$GS_DIR -e 'using Pkg; Pkg.instantiate()'
+
+    # Set MPIPreferences to use Cray's MPICH in LocalPreferences.toml
+    julia --project=$GS_DIR -e 'using MPIPreferences; MPIPreferences.use_system_binary(mpiexec="srun", vendor="cray")'
+
+    # Set JACC AMDGPU back end in LocalPreferences.toml
+    julia --project=$GS_DIR -e 'using JACC; JACC.JACCPreferences.set_backend("AMDGPU")'
+
+    # Verify the packages are installed correctly
+    julia --project=$GS_DIR -e 'using Pkg; Pkg.build()'
+    # Precompile dependencies
+    julia --project=$GS_DIR -e 'using Pkg; Pkg.precompile()'
     ```
 
-4. Run Gray-Scott submitting a job
+  {: .info }
+  JULIA_DEPOT is where Julia packages and artifacts (e.g. extra data) will be installed for different local environments.
 
-  - Script prepared for this tutorial [`GrayScott.jl/scripts/job_odo.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/job_odo.sh)
 
-  - The [GrayScott.jl/examples/settings-files.json](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/examples/settings-files.json) allows to run different jobs for different size problems.
+## Running Gray-Scott jobs on Odo/Frontier
 
-  - Set up the above files and run, in a separate directory, `sbatch job_odo.sh`
+1. Create an area for Gray-Scott runs outside the repository (e.g. run001, future runs will be in run002, run003, etc.)
 
+    ```bash
+    mkdir run001
+    ```
+
+2. Copy the Gray-Scott settings file and the job_odo.sh to the run directory
+
+    ```bash
+    cp GrayScott.jl/examples/settings-file-odo.json run001
+    cp GrayScott.jl/scripts/job_odo.sh run001
+    ```
+
+3. Submit your first job to Odo. It should generate an adios bp file output, and total runtime should be around 17 seconds using a single MPI process and AMD GPU.
+
+    ```bash
+    cd run001
+    sbatch job_odo.sh
+    ```
+
+4. Check the output files generated by the job
+
+    ```bash
+    bpls -lav gs-1MPI-1GPU-64L-F32-JACC-AMDGPU.bp
+    ```
+
+    ```xml
+    File info:
+    of variables:  3
+    of attributes: 13
+    statistics:    Min / Max 
+
+    double   Du                           attr   = 0.2
+    double   Dv                           attr   = 0.1
+    double   F                            attr   = 0.02
+    string   Fides_Data_Model             attr   = "uniform"
+    string   Fides_Dimension_Variable     attr   = "U"
+    double   Fides_Origin                 attr   = {0, 0, 0}
+    double   Fides_Spacing                attr   = {0.1, 0.1, 0.1}
+    string   Fides_Variable_Associations  attr   = {"points", "points"}
+    string   Fides_Variable_List          attr   = {"U", "V"}
+    float    U                            100*{64, 64, 64} = -0.115931 / 1.46275
+    float    V                            100*{64, 64, 64} = 0 / 1.04308
+    double   dt                           attr   = 1
+    double   k                            attr   = 0.048
+    double   noise                        attr   = 0.1
+    int32_t  step                         100*scalar = 10 / 1000
+    string   vtk.xml                      attr   = 
+    <VTKFile type="ImageData" version="0.1" byte_order="LittleEndian">
+      <ImageData WholeExtent="0 64 0 64 0 64" Origin="0 0 0" Spacing="1 1 1">
+        <Piece Extent="0 64 0 64 0 64">
+          <CellData Scalars="U">
+            <DataArray Name="U" />
+            <DataArray Name="V" />
+            <DataArray Name="TIME">
+                  step
+                </DataArray>
+          </CellData>
+        </Piece>
+      </ImageData>
+    </VTKFile>
+    ```
+
+5. Future runs: repeats steps 1-3 above , and edit the settings file to set the desired parameters for the Gray-Scott simulation.
+
+   - `L` is the number of cells on each direction, Lx = Ly = Lz = L, so L^3 is the total number of cells.
+   - `plotgap` is the number of steps between each visualization output.
+   - `steps` is the total number of steps to run the simulation.
+   - `output` is the name of the adios2 output directory dataset (can be visualized with ParaView for small cases)[docs](https://adios2.readthedocs.io/en/latest/ecosystem/visualization.html).
+   - Other variables might not influence the simulation but can be changed for testing purposes.
+
+    ```json
+    {
+    "L": 64,
+    "Du": 0.2,
+    "Dv": 0.1,
+    "F": 0.02,
+    "k": 0.048,
+    "dt": 1.0,
+    "plotgap": 10,
+    "steps": 1000,
+    "noise": 0.1,
+    "output": "gs-1MPI-1GPU-64L-F32-JACC-AMDGPU.bp",
+    "checkpoint": false,
+    "checkpoint_freq": 700,
+    "checkpoint_output": "ckpt.bp",
+    "restart": false,
+    "restart_input": "ckpt.bp",
+    "adios_config": "adios2.xml",
+    "adios_span": false,
+    "adios_memory_selection": false,
+    "mesh_type": "image",
+    "precision": "Float32"
+    }
+    ```
+
+6. Edit the launch script to request more resources: nodes, gpus, time (follow instructors directions at this point)
+
+    ```bash
+    #!/bin/bash
+    #SBATCH -A trn036
+    #SBATCH -J gs-julia-1MPI-1GPU
+    #SBATCH -o %x-%j.out
+    #SBATCH -e %x-%j.err
+    #SBATCH -t 0:02:00
+    #SBATCH -N 1
+
+    date
+    rocminfo
+
+    GS_DIR=/gpfs/wolf2/olcf/trn036/scratch/$USER/GrayScott.jl
+    GS_EXE=$GS_DIR/gray-scott.jl
+
+    srun -n 1 --gpus=1 julia --project=$GS_DIR $GS_EXE settings-files-odo.json
+
+    # launch this file with sbatch `$ sbatch job_odo.sh`
+    ```
