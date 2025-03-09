@@ -191,12 +191,12 @@ We assume the user has access to the `trn036` training account
     #SBATCH -N 1
 
     date
-    rocminfo
+    #rocminfo
 
     GS_DIR=/gpfs/wolf2/olcf/trn036/scratch/$USER/GrayScott.jl
     GS_EXE=$GS_DIR/gray-scott.jl
 
-    srun -n 1 --gpus=1 julia --project=$GS_DIR $GS_EXE settings-files-odo.json
+    srun -n 1 --gpus=1 julia --project=$GS_DIR $GS_EXE settings-file-odo.json
 
     # launch this file with sbatch `$ sbatch job_odo.sh`
     ```
