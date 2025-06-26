@@ -12,24 +12,17 @@ This is a step-by-step guide
 
 1. ssh into odo: `ssh <username>@login1.odo.olcf.ornl.gov`
 
-2. Launch Julia:
+2. Clone Gray-Scott repository in your home directory.
 
     ```
-    $ module load julia
-    $ julia
-                _
-    _       _ _(_)_     |  Documentation: https://docs.julialang.org
-    (_)     | (_) (_)    |
-    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
-    | | | | | | |/ _` |  |
-    | | |_| | | | (_| |  |  Version 1.9.0 (2023-05-07)
-    _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
-    |__/                   |
+    $ git clone https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
 3. Create a JupyterHub kernel with IJulia
     
     ```
+    julia> ]
+    (v1.11) pkg> add IJulia
     julia> using IJulia
 
     julia> installkernel("Julia-24threads", "--project=@.", env=Dict("LD_LIBRARY_PATH" => "", "JULIA_NUM_THREADS" => "24"))
