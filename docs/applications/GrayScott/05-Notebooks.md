@@ -12,27 +12,16 @@ This is a step-by-step guide
 
 1. ssh into odo: `ssh <username>@login1.odo.olcf.ornl.gov`
 
-2. Launch Julia:
+2. Clone Gray-Scott repository in your home directory.
 
     ```
-    $ module load julia
-    $ julia
-                _
-    _       _ _(_)_     |  Documentation: https://docs.julialang.org
-    (_)     | (_) (_)    |
-    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
-    | | | | | | |/ _` |  |
-    | | |_| | | | (_| |  |  Version 1.9.0 (2023-05-07)
-    _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
-    |__/                   |
+    $ git clone https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
-3. Create a JupyterHub kernel with IJulia
+3. Source the script to set up the environment, modules, and packages. This is a one-time step and might take a few minutes.
     
-    ```
-    julia> using IJulia
-
-    julia> installkernel("Julia-24threads", "--project=@.", env=Dict("LD_LIBRARY_PATH" => "", "JULIA_NUM_THREADS" => "24"))
+    ```bash
+    $ source GrayScott.jl/Notebooks/Plot2D.jl/config_Odo_IJulia_kernel.sh
     ```
 
 4. The above would create a config file to launch the Julia kernel next time we open [Jupyter OLCF open](https://jupyter-open.olcf.ornl.gov/)
@@ -59,7 +48,9 @@ This is a step-by-step guide
 
 5. Log into [Jupyter OLCF open](https://jupyter-open.olcf.ornl.gov/) and select the kernel `Julia-24threads) 1.10.4` to start a new notebook. Example provided in [GrayScott.jl/Notebooks/Plot2D.jl/src/Julia-reading.ipynb](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/Notebooks/Plot2D.jl/src/Julia-reading.ipynb). Package dependencies need to be precompiled on the first run, instantiate: `GrayScott-JACC/Notebooks/Plot2D.jl/Project.toml`.
 
-
+6. Copy the generated bp file to `/ccs/open/home/<username>`
+   
+7. Modify and execute the [Plot2D.ipynb notebook](https://github.com/JuliaORNL/GrayScott.jl/blob/main/Notebooks/Plot2D.jl/src/Plot2D.ipynb) - it might take a while.
 
 # Julia's own Pluto.jl
 
