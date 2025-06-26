@@ -21,10 +21,10 @@ We assume the user has access to the `trn036` training account
 
     ```
     cd /gpfs/wolf2/olcf/trn036/scratch/$USER
-    git clone --branch GrayScott-JACC https://github.com/JuliaORNL/GrayScott.jl.git
+    git clone https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
-3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_odo.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_perlmutter.sh) to set up modules, environment, and packages. This is a one-time step and might take a few minutes.
+3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_odo.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/main/scripts/config_odo.sh) to set up modules, environment, and packages. This is a one-time step and might take a few minutes.
 
     ```bash
     source GrayScott.jl/scripts/config_odo.sh
@@ -37,7 +37,7 @@ We assume the user has access to the `trn036` training account
     export JULIA_DEPOT_PATH=$PROJ_DIR/.julia
     GS_DIR=$PROJ_DIR/GrayScott.jl
 
-    # good practice to remove package and confi generated files 
+    # remove existing generated Manifest.toml
     rm -f $GS_DIR/Manifest.toml
     rm -f $GS_DIR/LocalPreferences.toml
 
@@ -45,29 +45,28 @@ We assume the user has access to the `trn036` training account
     module purge
 
     # load required modules
-    module load PrgEnv-gnu-amd/8.6.0
+    module load PrgEnv-cray/8.6.0
     module load cray-mpich
+    module load rocm/6.3.1
     module load adios2/2.10.0-mpi
+    module load Core/25.05
+    module load julia/1.11.0
 
-    # Use Julia installed binary distribution until module is available
-    #module load julia/1.10.4
-    export PATH=/gpfs/wolf2/olcf/trn036/world-shared/julia-1.11.3/bin:$PATH
-    julia --version
+    # AMDGPU.jl requires rocm system libraries (default = /opt/rocm)
+    export ROCM_PATH=/opt/rocm-6.3.1
 
-    # Set ROCM system libraries for AMDGPU.jl (default = /opt/rocm)
-    export ROCM_PATH=/opt/rocm-5.7.1
-
-    # Set ADIOS2 system libraries for ADIOS2.jl
+    # Required to point at underlying modules above
     export JULIA_ADIOS2_PATH=$OLCF_ADIOS2_ROOT
 
-    # DOWNLOAD JULIA PACKAGES
+    # Downloads Julia packages in Project.toml
     julia --project=$GS_DIR -e 'using Pkg; Pkg.instantiate()'
 
     # Set MPIPreferences to use Cray's MPICH in LocalPreferences.toml
     julia --project=$GS_DIR -e 'using MPIPreferences; MPIPreferences.use_system_binary(mpiexec="srun", vendor="cray")'
 
-    # Set JACC AMDGPU back end in LocalPreferences.toml
-    julia --project=$GS_DIR -e 'using JACC; JACC.JACCPreferences.set_backend("AMDGPU")'
+    # Set JACC AMDGPU back end in LocalPreferences.toml.
+    # It will add AMDGPU to Project.toml
+    julia --project=$GS_DIR -e 'using JACC; JACC.set_backend("AMDGPU")'
 
     # Verify the packages are installed correctly
     julia --project=$GS_DIR -e 'using Pkg; Pkg.build()'
@@ -76,7 +75,7 @@ We assume the user has access to the `trn036` training account
     ```
 
   {: .info }
-  JULIA_DEPOT is where Julia packages and artifacts (e.g. extra data) will be installed for different local environments. Do not use $HOME for limited performance - not scalable - and storage reasons.
+  JULIA_DEPOT is where Julia packages and artifacts (e.g. extra data) will be installed for different local environments. Do not use $HOME for limited performance - not scalable - and storage reasons, but for local tasks (e.g. analysis).
 
   {: .info }
 
