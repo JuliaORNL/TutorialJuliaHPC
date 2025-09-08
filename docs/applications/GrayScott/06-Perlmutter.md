@@ -23,7 +23,7 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
 
     ```bash
     cd $SCRATCH
-    git clone --branch GrayScott-JACC https://github.com/JuliaORNL/GrayScott.jl.git
+    git clone https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
 3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_perlmutter.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/GrayScott-JACC/scripts/config_perlmutter.sh) to set up modules, environment, and packages. This is a one-time step and might take a few minutes.
@@ -47,12 +47,12 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     module purge
 
     # load required modules
-    module load PrgEnv-gnu
+    module load PrgEnv-nvidia
     # this is just due to an adios2 requirement, parallel HDF5 can be added in the future
     module load cray-hdf5-parallel
     # module load nvhpc not tested, use cudatoolkit instead
     module load cudatoolkit/12.2
-    ml use /global/common/software/nersc/julia_hpc_24/modules
+    module use /global/common/software/nstaff/blaschke/tutorials/julia-hpc-tutorial-icpp25/nersc/modules
     module load adios2
 
     # module julia 1.11, won't work with julia 1.10
@@ -60,7 +60,8 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     module load julia/1.11.3
 
     # Required for Julia bindings to point at underlying adios2 modules
-    export JULIA_ADIOS2_PATH=/global/common/software/nersc/julia_hpc_24/adios2/gnu
+    # export JULIA_ADIOS2_PATH=/global/common/software/nersc/julia_hpc_24/adios2/gnu
+    export JULIA_ADIOS2_PATH=/global/common/software/nstaff/blaschke/tutorials/julia-hpc-tutorial-icpp25/nersc/adios2/install/nvidia
 
     # Instantiate the project by installing packages in Project.toml
     julia --project=$GS_DIR -e 'using Pkg; Pkg.instantiate()'
