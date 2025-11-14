@@ -9,7 +9,7 @@ parent: GrayScott reaction-diffusion 3D solver
 
 This instructions are for the [Perlmutter system at NERSC](https://docs.nersc.gov/systems/perlmutter/architecture/). 
 
-We assume the user has access to a `trnXXX` valid training account on NERSC with a user name `<user>`.
+We assume the user has access to a `trnXXX` or `ntrainXXX` valid training account on NERSC with a user name `<user>`.
 
 ## Configuring Gray-Scott on Perlmutter
 
@@ -55,12 +55,10 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     module use /global/common/software/nstaff/blaschke/tutorials/julia-hpc-tutorial-icpp25/nersc/modules
     module load adios2
 
-    # module julia 1.11, won't work with julia 1.10
-    ml use /global/common/software/nersc9/julia/modules/
-    module load julia/1.11.3
+    # load julia module
+    module load julia/1.12.1
 
     # Required for Julia bindings to point at underlying adios2 modules
-    # export JULIA_ADIOS2_PATH=/global/common/software/nersc/julia_hpc_24/adios2/gnu
     export JULIA_ADIOS2_PATH=/global/common/software/nstaff/blaschke/tutorials/julia-hpc-tutorial-icpp25/nersc/adios2/install/nvidia
 
     # Instantiate the project by installing packages in Project.toml
@@ -188,7 +186,7 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
 
     ```bash
     #!/bin/bash
-    #SBATCH -A ntrain1
+    #SBATCH -A ntrain7
     #SBATCH -C gpu
     #SBATCH -q shared
     #SBATCH -J gs-julia-1MPI-1GPU
@@ -217,7 +215,7 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
 2. Create a Julia kernel and environment for jupyter.nersc.gov. This is a one-time setup that will install packages in your home directory under `.julia` and kernels in `.local/share/jupyter/kernels` (might take a while)
 
     ```bash
-    git clone --branch GrayScott-JACC https://github.com/JuliaORNL/GrayScott.jl.git
+    git clone https://github.com/JuliaORNL/GrayScott.jl.git
     cd GrayScott.jl/Notebooks/Plot2D.jl
     source config_Perlmutter_IJulia_kernel.sh  
     ```
@@ -230,11 +228,11 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
 
     ```bash
     # source this file to generate a new IJulia kernel for Perlmutter
-    module load julia/1.10.4
+    module load julia/1.12.1
     module load cray-hdf5-parallel
-    ml use /global/common/software/nersc/julia_hpc_24/modules
+    module use /global/common/software/nstaff/blaschke/tutorials/julia-hpc-tutorial-icpp25/nersc/modules
     module load adios2
-    export JULIA_ADIOS2_PATH=/global/common/software/nersc/julia_hpc_24/adios2/gnu
+    export JULIA_ADIOS2_PATH=/global/common/software/nstaff/blaschke/tutorials/julia-hpc-tutorial-icpp25/nersc/adios2/install/nvidia
 
     # instantiate project packages
     julia --project -e 'using Pkg; Pkg.instantiate()'
@@ -244,24 +242,25 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
     ```
 
     ```bash
-    cat ~/.local/share/jupyter/kernels/julia-16-threads-1.10/kernel.json
+    cat ~/.local/share/jupyter/kernels/julia-16-threads-1.12/kernel.json
     ```
 
     ```json
     {
-      "display_name": "Julia-16-threads 1.10.4",
+      "display_name": "Julia-16-threads 1.12",
       "argv": [
-        "/global/common/software/nersc/n9/julia/1.10.4/bin/julia",
+        "/global/common/software/nersc9/julia/1.12.1/bin/julia",
         "-i",
         "--color=yes",
         "--project=@.",
-        "/global/homes/t/train671/.julia/packages/IJulia/dR0lE/src/kernel.jl",
+        "-e",
+        "import IJulia; IJulia.run_kernel()",
         "{connection_file}"
       ],
       "language": "julia",
       "env": {
-        "LD_LIBRARY_PATH": "/global/common/software/nersc/julia_hpc_24/adios2/gnu/lib64:/global/common/software/nersc9/darshan/default/lib:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/math_libs/12.2/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/extras/CUPTI/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/extras/Debugger/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/nvvm/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/lib64:/opt/cray/pe/papi/7.0.1.2/lib64:/opt/cray/libfabric/1.20.1/lib64",
-        "JULIA_ADIOS2_PATH": "/global/common/software/nersc/julia_hpc_24/adios2/gnu",
+        "LD_LIBRARY_PATH": "/global/common/software/nstaff/blaschke/tutorials/julia-hpc-tutorial-icpp25/nersc/adios2/install/nvidia/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/math_libs/12.2/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/extras/CUPTI/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/extras/Debugger/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/nvvm/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/23.9/cuda/12.2/lib64:/opt/nvidia/hpc_sdk/Linux_x86_64/24.5/compilers/lib:/global/homes/w/wgodoy/adios/2.5.0/lib64:/global/common/software/nersc9/darshan/default/lib:/opt/cray/pe/papi/7.1.0.2/lib64:/opt/cray/libfabric/1.22.0/lib64",
+        "JULIA_ADIOS2_PATH": "/global/common/software/nstaff/blaschke/tutorials/julia-hpc-tutorial-icpp25/nersc/adios2/install/nvidia",
         "JULIA_NUM_THREADS": "16"
       },
       "interrupt_mode": "signal"
@@ -274,11 +273,11 @@ We assume the user has access to a `trnXXX` valid training account on NERSC with
    
 5. Browse into the `GrayScott.jl/Notebooks/Plot2D.jl/src/Plot2D.ipynb` notebook and open it.
    
-6. Select the Julia-16-threads kernel from the dropdown menu.
+6. Select the `Julia-16-threads 1.12` kernel from the dropdown menu.
    
 7. Run the Notebook cells (right triangle or Run menu > Run All Cells) and check you can get to the picture shown below. This is your first complete workflow from running a Gray-Scott simulation on Perlmutter high-performance computing system and visualizing the results on jupyter.nersc.gov!!!!
 
     ![Gray-Scott analysis](./images/jupyter.png)
     *Gray-Scott U and V output visualization using Makie.jl and ADIOS2.jl*
 
-8. Congratulations!
+8. Congratulations! You have run high-performance computing code and do the data analysis using one language.
