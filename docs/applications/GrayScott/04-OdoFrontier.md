@@ -184,7 +184,7 @@ We assume the user has access to the `trn036` training account
 
     ```bash
     #!/bin/bash
-    #SBATCH -A trn036
+    #SBATCH -A trn047
     #SBATCH -J gs-julia-1MPI-1GPU
     #SBATCH -o %x-%j.out
     #SBATCH -e %x-%j.err
@@ -194,7 +194,7 @@ We assume the user has access to the `trn036` training account
     date
     #rocminfo
 
-    GS_DIR=/gpfs/wolf2/olcf/trn036/scratch/$USER/GrayScott.jl
+    GS_DIR=/gpfs/wolf2/olcf/trn047/scratch/$USER/GrayScott.jl
     GS_EXE=$GS_DIR/gray-scott.jl
 
     srun -n 1 --gpus=1 julia --project=$GS_DIR $GS_EXE settings-file-odo.json
