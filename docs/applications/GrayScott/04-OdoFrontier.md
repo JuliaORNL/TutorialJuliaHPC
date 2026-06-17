@@ -14,13 +14,13 @@ We assume the user has access to the `trn036` training account
 1. Access Odo/Frontier
 
     ```
-    $ ssh USERNAME@login1.odo.olcf.ornl.gov
+    $ ssh USERNAME@odo.olcf.ornl.gov
     ```
 
 2. Obtain Gray-Scott, first access your scrath directory, clone the repository pointing at the GrayScott-JACC branch. 
 
     ```
-    cd /gpfs/wolf2/olcf/trn036/scratch/$USER
+    cd /gpfs/wolf2/olcf/trn047/scratch/$USER
     git clone https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
@@ -33,7 +33,7 @@ We assume the user has access to the `trn036` training account
     ```bash
     #!/bin/bash
 
-    PROJ_DIR=/gpfs/wolf2/olcf/trn036/scratch/$USER
+    PROJ_DIR=/gpfs/wolf2/olcf/trn047/scratch/$USER
     export JULIA_DEPOT_PATH=$PROJ_DIR/.julia
     GS_DIR=$PROJ_DIR/GrayScott.jl
 
@@ -44,16 +44,18 @@ We assume the user has access to the `trn036` training account
     # good practice to avoid conflicts with existing default modules
     module purge
 
+    ROCM_VERSION=7.2.0
+
     # load required modules
     module load PrgEnv-cray/8.6.0
     module load cray-mpich
-    module load rocm/6.3.1
+    module load rocm/$ROCM_VERSION
     module load adios2/2.10.0-mpi
     module load Core/25.05
     module load julia/1.11.0
 
     # AMDGPU.jl requires rocm system libraries (default = /opt/rocm)
-    export ROCM_PATH=/opt/rocm-6.3.1
+    export ROCM_PATH=/opt/rocm-$ROCM_VERSION
 
     # Required to point at underlying modules above
     export JULIA_ADIOS2_PATH=$OLCF_ADIOS2_ROOT
@@ -182,7 +184,7 @@ We assume the user has access to the `trn036` training account
 
     ```bash
     #!/bin/bash
-    #SBATCH -A trn036
+    #SBATCH -A trn047
     #SBATCH -J gs-julia-1MPI-1GPU
     #SBATCH -o %x-%j.out
     #SBATCH -e %x-%j.err
@@ -192,7 +194,7 @@ We assume the user has access to the `trn036` training account
     date
     #rocminfo
 
-    GS_DIR=/gpfs/wolf2/olcf/trn036/scratch/$USER/GrayScott.jl
+    GS_DIR=/gpfs/wolf2/olcf/trn047/scratch/$USER/GrayScott.jl
     GS_EXE=$GS_DIR/gray-scott.jl
 
     srun -n 1 --gpus=1 julia --project=$GS_DIR $GS_EXE settings-file-odo.json
