@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Running Gray-Scott on Perlmutter/NERSC
-nav_order: 2.6
+nav_order: 2.4
 parent: GrayScott reaction-diffusion 3D solver
 ---
 

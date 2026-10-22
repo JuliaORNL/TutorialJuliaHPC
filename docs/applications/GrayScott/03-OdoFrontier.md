@@ -1,30 +1,32 @@
 ---
 layout: default
-title: Running Gray-Scott on Odo/Frontier
-nav_order: 2.4
+title: Running, Profiling, and Data Analysis on Odo/Frontier
+nav_order: 2.3
 parent: GrayScott reaction-diffusion 3D solver
 ---
 
-# Running Gray-Scott on Odo/Frontier
+# Running, Profiling, and Data Analysis on Odo/Frontier
 
 This instructions are for the [Odo training system at OLCF](https://docs.olcf.ornl.gov/systems/odo_user_guide.html). Which is almost identical to [Frontier](https://docs.olcf.ornl.gov/systems/frontier_user_guide.html).
 
-We assume the user has access to the `trn036` training account
+## Setting up the code
 
-1. Access Odo/Frontier
+We assume the user has access to the `trn047` training account.
+
+1. *Access Odo/Frontier*
 
     ```
     $ ssh USERNAME@odo.olcf.ornl.gov
     ```
 
-2. Obtain Gray-Scott, first access your scrath directory, clone the repository pointing at the GrayScott-JACC branch. 
+2. *Obtain the Gray-Scott.jl code*: first access your scratch directory, clone the repository.
 
     ```
     cd /gpfs/wolf2/olcf/trn047/scratch/$USER
     git clone https://github.com/JuliaORNL/GrayScott.jl.git
     ```
 
-3. Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_odo.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/main/scripts/config_odo.sh) to set up modules, environment, and packages. This is a one-time step and might take a few minutes.
+3. *Configure the environment*: Run the script prepared for this tutorial [`GrayScott.jl/scripts/config_odo.sh`](https://github.com/JuliaORNL/GrayScott.jl/blob/main/scripts/config_odo.sh) to set up modules, environment, and package dependencies. This is a one-time step and might take a few minutes.
 
     ```bash
     source GrayScott.jl/scripts/config_odo.sh
@@ -51,8 +53,7 @@ We assume the user has access to the `trn036` training account
     module load cray-mpich
     module load rocm/$ROCM_VERSION
     module load adios2/2.10.0-mpi
-    module load Core/25.05
-    module load julia/1.11.0
+    module load julia/1.13.1
 
     # AMDGPU.jl requires rocm system libraries (default = /opt/rocm)
     export ROCM_PATH=/opt/rocm-$ROCM_VERSION
@@ -77,12 +78,12 @@ We assume the user has access to the `trn036` training account
     ```
 
   {: .info }
-  JULIA_DEPOT is where Julia packages and artifacts (e.g. extra data) will be installed for different local environments. Do not use $HOME for limited performance - not scalable - and storage reasons, but for local tasks (e.g. analysis).
+  The JULIA_DEPOT (set by the environment variable `JULIA_DEPOT_PATH`) is where Julia packages and artifacts (e.g., extra data) will be installed for different local environments. Do not use $HOME for limited performance - not scalable - and storage reasons.
 
   {: .info }
 
 
-## Running Gray-Scott jobs on Odo/Frontier
+## Running jobs
 
 1. Create an area for Gray-Scott runs outside the repository (e.g. run001, future runs will be in run002, run003, etc.)
 
@@ -201,3 +202,9 @@ We assume the user has access to the `trn036` training account
 
     # launch this file with sbatch `$ sbatch job_odo.sh`
     ```
+
+## Profiling with rocprof
+
+
+
+## Data Analysis on Jupyter 

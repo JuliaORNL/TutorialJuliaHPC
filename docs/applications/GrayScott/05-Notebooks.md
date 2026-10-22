@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Julia Notebooks
-nav_order: 2.5
+nav_order: 2.4
 parent: GrayScott reaction-diffusion 3D solver
 ---
 

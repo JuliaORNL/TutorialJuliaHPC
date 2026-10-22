@@ -85,5 +85,5 @@ It's a good time to get the latest Julia installed from their [website](https://
 
 # Acknowledgements
 
-This tutorial is supported by the following ASCR projects: project Fairbanks as part of MAGNET, and S4PST and PESO of the Next Generation of Scientific Software Technologies.
-The many people in the Julia community that made this possible. Thanks to Suzanne Parete-Koon from the Oak Ridge Leadership Center (OLCF).
+This tutorial is supported by the following ASCR projects: S4PST of the Next Generation of Scientific Software Technologies, and Fairbanks/MAGMA part of competitive portfolios.
+The many people in the Julia community that made this possible. Thanks to Suzanne Parete-Koon and MacKenzie M. Boyd from the Oak Ridge Leadership Computing Facility (OLCF).

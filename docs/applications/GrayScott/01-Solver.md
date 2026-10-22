@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Solver
+title: Solver Description
 nav_order: 2.1
 parent: GrayScott reaction-diffusion 3D solver
 ---
