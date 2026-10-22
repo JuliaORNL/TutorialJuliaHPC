@@ -42,21 +42,23 @@ It's a good time to get the latest Julia installed from their [website](https://
 7. Interoperate with Fortran, C, C++ (via C), Python, R code in a lightweight manner
 8. Renewed interest for high-performance + high-productivity languages
 9. Great first language to expose newcomers to both HPC + math concepts
-10. Contribute to HPC stack: MPI.jl, CUDA.jl, AMDGPU.jl, KernelAbstractions.jl, JACC.jl, ADIOS2.jl, HDF5.jl...for us, by us
+10. Contribute to HPC stack: MPI.jl, CUDA.jl, AMDGPU.jl, KernelAbstractions.jl, JACC.jl, ADIOS2.jl, HDF5.jl.
+11. Julia is AI agents friendly due to its simplified syntax
 
 ![](images/Blog_2303_julia_value_proposition.png)**Julia's value proposition**
 
 # Why not Julia?
 
-1. Already existing infrastructure/expertise (Fortran is perfect!)
-2. Too much of an investment to learn a new language
-3. Performance/productivity solutions already in place
-4. Having N-language/ecosystems is not a problem
-5. Python + X is well supported for your needs
-6. Garbage collection, Just-in-time (JIT) compilation are issues
-7. Developing low-level system libraries
-8. Domain outside "technical computing"
-9. Overall, you do not see any value added
+1. AI has made language choice less relevant
+2. Already existing infrastructure/expertise (Fortran is perfect!)
+3. Too much of an investment to learn a new language
+4. Performance/productivity solutions already in place
+5. Having N-language/ecosystems is not a problem
+6. Python + X is well supported for your needs
+7. Garbage collection, Just-in-time (JIT) compilation are issues
+8. Developing low-level system libraries
+9. Domain outside "technical computing"
+10. Overall, you do not see any value added
 
 ## Resources
 
@@ -66,7 +68,7 @@ It's a good time to get the latest Julia installed from their [website](https://
    
 3. [JuliaParallel.org](https://juliaparallel.org/resources/). Checkout the monthly HPC call and previous events: SC24 BoF.
    
-4. [JuliaCon](https://juliacon.org/2024/)
+4. [JuliaCon](https://juliacon.org/2026/)
 
 5. [OLCF September User's Call presentations](https://www.olcf.ornl.gov/calendar/userconcall-sep2022/) 
 
@@ -81,6 +83,12 @@ It's a good time to get the latest Julia installed from their [website](https://
 10. William F. Godoy, Pedro Valero-Lara, T. Elise Dettling, Christian Trefftz, Ian Jorquera, Thomas Sheehy, Ross G. Miller, Marc Gonzalez-Tallada, Jeffrey S. Vetter, and Valentin Churavy. "Evaluating performance and portability of high-level programming models: Julia, Python/Numba, and Kokkos on exascale nodes." In 2023 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW), pp. 373-382. IEEE, 2023. [doi:10.1109/IPDPSW59300.2023.00068](https://doi.org/10.1109/IPDPSW59300.2023.00068)
 
 11. William F. Godoy, Pedro Valero-Lara, Caira Anderson, Katrina W. Lee, Ana Gainaru, Rafael Ferreira Da Silva, and Jeffrey S. Vetter. 2023. Julia as a unifying end-to-end workflow language on the Frontier exascale system. In Proceedings of the SC '23 Workshops of The International Conference on High Performance Computing, Network, Storage, and Analysis (SC-W '23). Association for Computing Machinery, New York, NY, USA, 1989–1999. [doi:10.1145/3624062.3624278](https://doi.org/10.1145/3624062.3624278)
+
+12. Pedro Valero-Lara, William F. Godoy, Het Mankad, Keita Teranishi, Jeffrey S. Vetter, Johannes Blaschke, and Michel Schanen. "JACC: leveraging HPC meta-programming and performance portability with the just-in-time and llvm-based julia language." In SC24-W: Workshops of the International Conference for High Performance Computing, Networking, Storage and Analysis, pp. 1955-1966. IEEE, 2024. [doi:10.1109/SCW63240.2024.00245](https://doi.org/10.1109/SCW63240.2024.00245)
+    
+13. Pedro Valero-Lara, William F. Godoy, Keita Teranishi and Jeffrey S. Vetter, "JACC.shared: Leveraging HPC Metaprogramming and Performance Portability for Computations That Use Shared Memory GPUs," 2024 IEEE High Performance Extreme Computing Conference (HPEC), Wakefield, MA, USA, 2024, pp. 1-7, [doi:10.1109/HPEC62836.2024.10938453](https://doi.org/10.1109/HPEC62836.2024.10938453).
+    
+14. Pedro Valero-Lara, William F. Godoy, Philip W. Fackler, Keita Teranishi and Jeffrey S. Vetter, "Enabling Scientific Applications with Performance-Portability and High-Productivity for Multi-GPU Programming with JACC.Multi," 2025 IEEE International Conference on eScience (eScience), Chicago, IL, USA, 2025, pp. 240-249, [doi:10.1109/eScience65000.2025.00036](https://doi.org/10.1109/eScience65000.2025.00036)
 
 
 # Acknowledgements
