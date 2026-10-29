@@ -283,7 +283,7 @@ We assume the user has access to a `trnXXX` or `ntrainXXX` valid training accoun
    
 7. Run the Notebook cells (right triangle or Run menu > Run All Cells) and check you can get to the picture shown below. This is your first complete workflow from running a Gray-Scott simulation on Perlmutter high-performance computing system and visualizing the results on jupyter.nersc.gov!!!!
 
-    ![Gray-Scott analysis](./images/jupyter.png)
+    ![Gray-Scott analysis](./images/jupyter-NERSC.png)
     *Gray-Scott U and V output visualization using Makie.jl and ADIOS2.jl*
 
 8. Congratulations! You have run high-performance computing code and do the data analysis using one language.
