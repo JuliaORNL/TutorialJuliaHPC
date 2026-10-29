@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Running the Gray-Scott Workflow
+title: Code Description
 nav_order: 2.2
 parent: GrayScott reaction-diffusion 3D solver
 ---
