@@ -300,7 +300,7 @@ Adding profiling with `rocprof` allows you to analyze the performance of your Gr
 
 2. Go to the OLCF JupyterHub Open portal: [https://jupyter-open.olcf.ornl.gov/](https://jupyter-open.olcf.ornl.gov/). After signing in and selecting the Onyx Compute resource, select the `julia-hpc-sc26 1.13` kernel to run the `Plot2D.ipynb` notebook to inspect data from `run001`. 
 
-3. Browse into the notebook location if it is not immediately visible: `/gpfs/wolf2/olcf/trn047/scratch/$USER$/GrayScott.jl/Notebooks/Plot2D.jl/src`
+3. Browse into the notebook location if it is not immediately visible: `/gpfs/wolf2/olcf/trn047/scratch/$USER/GrayScott.jl/Notebooks/Plot2D.jl/src`
 
 4. Run the Notebook cells (right triangle or Run menu > Run All Cells) and check you can get to the picture shown below. It might take some time for the packages to be precompiled. The result is a generated set of pdf files containing the 2D `x-y` visualizations of the simulation data on the `z=L/2` plane
 This is your first complete workflow from running a Gray-Scott simulation on Perlmutter high-performance computing system and visualizing the results on JupyterHub Open. 
